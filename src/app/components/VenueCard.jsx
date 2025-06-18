@@ -59,7 +59,7 @@ export default function EventCard({ event }) {
             <MapPin size={16} />
             <span>{event.location}</span>
           </div>
-          {/* <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <Image
               src={event.lastModifiedBy.avatar}
               alt="Avatar"
@@ -70,7 +70,7 @@ export default function EventCard({ event }) {
             <span className="text-gray-600 text-sm">
               Last modified {event.lastModifiedBy.timeAgo}
             </span>
-          </div> */}
+          </div>
         </div>
       </div>
 
@@ -114,7 +114,7 @@ export default function EventCard({ event }) {
           className="flex items-center gap-1 text-[#1F5C9E] mr-5 text-sm hover:underline"
         >
           <LinkIcon size={14} />
-          Registration Link
+          Venue Website
         </a>
       </div>
     </div>

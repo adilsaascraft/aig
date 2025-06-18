@@ -16,7 +16,7 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
-          <Image src="/logo.png" alt="AIG Hospitals Logo" width={150} height={40} />
+          <Image src="/logo.png" alt="AIG Hospitals Logo" width={120} height={40} />
         </Link>
 
         {/* Desktop Nav */}
