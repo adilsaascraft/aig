@@ -38,7 +38,7 @@ export default function Footer() {
 
         {/* Contact & Social */}
         <div className="flex flex-col items-center md:items-end">
-          <img src="/images/aig-logo.png" alt="AIG Logo" className="h-12 mb-4" />
+          <img src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750330449/AIG_Event_Software/DummyImages/aig-logo_wyynuk.png" alt="AIG Logo" className="h-12 mb-4" />
           <a href="mailto:info@aighospitals.com" className="text-sm font-semibold underline mb-4">
             info@aighospitals.com
           </a>
@@ -54,9 +54,9 @@ export default function Footer() {
 
           {/* Certifications */}
           <div className="flex space-x-3">
-            <img src="/images/gold.png" alt="Gold Seal" className="h-10 w-10" />
-            <img src="/images/nabn.png" alt="NABH" className="h-10 w-10" />
-            <img src="/images/medical.png" alt="Medical Logo" className="h-10 w-10" />
+            <img src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750330477/AIG_Event_Software/DummyImages/gold_tbgvxg.png" alt="Gold Seal" className="h-10 w-10" />
+            <img src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750330512/AIG_Event_Software/DummyImages/nabn_holcws.png" alt="NABH" className="h-10 w-10" />
+            <img src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750330510/AIG_Event_Software/DummyImages/medical_pi8zwl.png" alt="Medical Logo" className="h-10 w-10" />
           </div>
         </div>
       </div>
