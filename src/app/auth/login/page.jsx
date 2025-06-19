@@ -107,7 +107,7 @@ export default function Login() {
         {/* Image Section (Hidden on Mobile) */}
         <div className="hidden md:block md:w-1/2">
           <Image
-            src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750328348/AIG_Event_Software/login-signup/login.png"
+            src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750330038/AIG_Event_Software/login-signup/login_bdhrsz.png"
             alt="AIG Hospital"
             className="object-cover h-full w-full"
             width={500}
