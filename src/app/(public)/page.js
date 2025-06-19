@@ -39,7 +39,7 @@ export default function HomeHero() {
   }
 
   return (
-    <section className="relative h-[90vh] flex items-center justify-start px-8 text-white bg-cover bg-center" style={{ backgroundImage: "url('/home.jpg')" }}>
+    <section className="relative h-[90vh] flex items-center justify-start px-8 text-white bg-cover bg-center" style={{ backgroundImage: "url('https://res.cloudinary.com/dr5kn8993/image/upload/v1750328771/AIG_Event_Software/home_images/Home.jpg')" }}>
       <div className="max-w-2xl z-10">
         <h1 className="text-5xl font-bold mb-4">AIG Hospitals</h1>
         <p className="text-lg mb-2">Lorem ipsum dolor sit amet consectetur. Accumsan sed volutpat placerat dignissim nisi lacus at in.</p>
