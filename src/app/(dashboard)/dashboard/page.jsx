@@ -2,9 +2,11 @@
 import { useEffect, useState } from 'react'
 import Sidebar from '../../components/Sidebar'
 import EventCard from '../../components/EventCard'
+import OrganizerTable from '../../components/OrganizerTable'
 import eventData from '../../data/event'
 import venueData from '../../data/venues'
 import hotelData from '../../data/hotel'
+import organizersData from '../../data/organizer'
 
 const sectionMap = {
   event: {
@@ -25,6 +27,12 @@ const sectionMap = {
     tabs: ['Active', 'Inactive', 'All', 'Trash'],
     data: hotelData,
   },
+  organizer: {
+    title: 'Your Organizer',
+    button: '＋ Add Organizer',
+    tabs: ['Active', 'Inactive', 'All', 'Trash'],
+    data: organizersData,
+  },
 }
 
 export default function DashboardPage() {
@@ -34,13 +42,21 @@ export default function DashboardPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 3
 
-  const sectionConfig = sectionMap[section]
+  const sectionConfig = sectionMap[section] || {
+    title: 'Unknown Section',
+    button: '',
+    tabs: [],
+    data: [],
+  }
+
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    setItems(sectionConfig.data)
-    setActiveTab(sectionConfig.tabs[0])
-    setCurrentPage(1)
+    if (sectionMap[section]) {
+      setItems(sectionMap[section].data)
+      setActiveTab(sectionMap[section].tabs[0])
+      setCurrentPage(1)
+    }
   }, [section])
 
   const filteredItems = items.filter(
@@ -58,9 +74,17 @@ export default function DashboardPage() {
     setCurrentPage(1)
   }
 
+  const handleSectionChange = (newSectionKey) => {
+    if (sectionMap[newSectionKey]) {
+      setSection(newSectionKey)
+    } else {
+      console.warn(`Unknown section: ${newSectionKey}`)
+    }
+  }
+
   return (
     <div className="flex min-h-screen">
-      <Sidebar onSectionChange={setSection} />
+      <Sidebar onSectionChange={handleSectionChange} />
       <div className="flex-1 p-8 bg-gray-50">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">{sectionConfig.title}</h1>
@@ -133,6 +157,171 @@ export default function DashboardPage() {
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client'
+// import { useEffect, useState } from 'react'
+// import Sidebar from '../../components/Sidebar'
+// import EventCard from '../../components/EventCard'
+// import eventData from '../../data/event'
+// import venueData from '../../data/venues'
+// import hotelData from '../../data/hotel'
+
+// const sectionMap = {
+//   event: {
+//     title: 'Your Events',
+//     button: '＋ Add Event',
+//     tabs: ['Running', 'Live', 'Drafts', 'Past', 'Cancelled', 'All', 'Trash'],
+//     data: eventData,
+//   },
+//   venues: {
+//     title: 'Your Venues',
+//     button: '＋ Add Venue',
+//     tabs: ['Active', 'Inactive', 'All', 'Trash'],
+//     data: venueData,
+//   },
+//   hotel: {
+//     title: 'Your Hotels',
+//     button: '＋ Add Hotel',
+//     tabs: ['Active', 'Inactive', 'All', 'Trash'],
+//     data: hotelData,
+//   },
+// }
+
+// export default function DashboardPage() {
+//   const [section, setSection] = useState('Events')
+//   const [activeTab, setActiveTab] = useState('Live')
+//   const [searchQuery, setSearchQuery] = useState('')
+//   const [currentPage, setCurrentPage] = useState(1)
+//   const itemsPerPage = 3
+
+//   const sectionConfig = sectionMap[section]
+//   const [items, setItems] = useState([])
+
+//   useEffect(() => {
+//     setItems(sectionConfig.data)
+//     setActiveTab(sectionConfig.tabs[0])
+//     setCurrentPage(1)
+//   }, [section])
+
+//   const filteredItems = items.filter(
+//     (item) =>
+//       (activeTab === 'All' || item.status === activeTab) &&
+//       item.title.toLowerCase().includes(searchQuery.toLowerCase())
+//   )
+
+//   const totalPages = Math.ceil(filteredItems.length / itemsPerPage)
+//   const startIndex = (currentPage - 1) * itemsPerPage
+//   const paginatedItems = filteredItems.slice(startIndex, startIndex + itemsPerPage)
+
+//   const handleTabChange = (tab) => {
+//     setActiveTab(tab)
+//     setCurrentPage(1)
+//   }
+
+//   return (
+//     <div className="flex min-h-screen">
+//       <Sidebar onSectionChange={setSection} />
+//       <div className="flex-1 p-8 bg-gray-50">
+//         <div className="flex justify-between items-center mb-4">
+//           <h1 className="text-2xl font-bold">{sectionConfig.title}</h1>
+//           <button className="bg-sky-800 hover:bg-sky-900 text-white px-4 py-2 rounded-md shadow">
+//             {sectionConfig.button}
+//           </button>
+//         </div>
+
+//         {/* Tabs */}
+//         <div className="flex gap-6 mb-6 border-b border-gray-200">
+//           {sectionConfig.tabs.map((tab) => (
+//             <button
+//               key={tab}
+//               onClick={() => handleTabChange(tab)}
+//               className={`pb-2 ${
+//                 activeTab === tab
+//                   ? 'border-b-2 border-sky-800 text-sky-800 font-semibold'
+//                   : 'text-gray-500'
+//               }`}
+//             >
+//               {tab}
+//             </button>
+//           ))}
+//         </div>
+
+//         {/* Search */}
+//         <div className="mb-4">
+//           <input
+//             type="text"
+//             placeholder={`Search ${section}...`}
+//             value={searchQuery}
+//             onChange={(e) => {
+//               setSearchQuery(e.target.value)
+//               setCurrentPage(1)
+//             }}
+//             className="w-full max-w-md px-4 py-2 border border-gray-300 rounded"
+//           />
+//         </div>
+
+//         {/* Cards */}
+//         <div className="space-y-6">
+//           {paginatedItems.length > 0 ? (
+//             paginatedItems.map((item) => (
+//               <EventCard key={item.id} event={item} />
+//             ))
+//           ) : (
+//             <p className="text-gray-500">No {section} found.</p>
+//           )}
+//         </div>
+
+//         {/* Pagination */}
+//         {totalPages > 1 && (
+//           <div className="flex justify-center mt-8 space-x-2">
+//             {Array.from({ length: totalPages }, (_, index) => (
+//               <button
+//                 key={index + 1}
+//                 onClick={() => setCurrentPage(index + 1)}
+//                 className={`px-3 py-1 border rounded ${
+//                   currentPage === index + 1
+//                     ? 'bg-blue-600 text-white'
+//                     : 'bg-white text-gray-600 border-gray-300'
+//                 }`}
+//               >
+//                 {index + 1}
+//               </button>
+//             ))}
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   )
+// }
 
 
 
