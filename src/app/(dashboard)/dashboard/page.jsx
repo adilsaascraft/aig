@@ -27,9 +27,27 @@ const sectionMap = {
     tabs: ['Active', 'Inactive', 'All', 'Trash'],
     data: hotelData,
   },
-  organizer: {
-    title: 'Your Organizer',
+  organizers: {
+    title: 'Your Organizers',
     button: '＋ Add Organizer',
+    tabs: ['Active', 'Inactive', 'All', 'Trash'],
+    data: organizersData,
+  },
+  departments: {
+    title: 'Your Organizers',
+    button: '＋ Add Organizer',
+    tabs: ['Active', 'Inactive', 'All', 'Trash'],
+    data: organizersData,
+  },
+  teams: {
+    title: 'Your Teams',
+    button: '＋ Add Team',
+    tabs: ['Active', 'Inactive', 'All', 'Trash'],
+    data: organizersData,
+  },
+  suppliers: {
+    title: 'Your Suppliers',
+    button: '＋ Add Supplier',
     tabs: ['Active', 'Inactive', 'All', 'Trash'],
     data: organizersData,
   },
