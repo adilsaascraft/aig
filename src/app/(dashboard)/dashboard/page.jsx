@@ -80,7 +80,7 @@ export default function DashboardPage() {
   const filteredItems = items.filter(
     (item) =>
       (activeTab === 'All' || item.status === activeTab) &&
-      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      item.title?.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage)

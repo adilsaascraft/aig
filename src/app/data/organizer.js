@@ -1,6 +1,7 @@
-const dummyData = [
+const organizersData = [
   {
     id: 1,
+    status: 'Active',
     name: 'AIG Hospitals',
     contact: 'Ahmad Rosser',
     phone: '565433226',
@@ -105,3 +106,4 @@ const dummyData = [
     email: 'abc@gmail.com',
   },
 ]
+export default organizersData
