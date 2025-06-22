@@ -33,13 +33,13 @@ export default function DashboardNavbar() {
         {/* Right Section: Icons */}
         <div className="hidden md:flex items-center space-x-4">
           <button aria-label="Help">
-            <Image src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750239338/AIG_Event_Software/icons/help_icon.png" alt="Help" width={30} height={30} />
+            <Image src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750585607/AIG_Event_Software/icons/help_wf3sqb.png" alt="Help" width={20} height={20} />
           </button>
-          <button aria-label="Notifications">
-            <Image src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750239422/AIG_Event_Software/icons/announcement_icon.png" alt="Megaphone" width={30} height={30} />
+          <button aria-label="Anouncement">
+            <Image src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750585097/AIG_Event_Software/icons/anouncement_tycrgw.png" alt="Anouncement" width={25} height={25} />
           </button>
           <Image
-            src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750239421/AIG_Event_Software/icons/profile_icon.png"
+            src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750585099/AIG_Event_Software/icons/profile_zog8po.png"
             alt="User Avatar"
             width={32}
             height={32}

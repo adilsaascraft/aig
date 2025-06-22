@@ -30,7 +30,7 @@ export default function Sidebar({ onSectionChange }) {
   }
 
   return (
-    <div className="w-60 h-screen bg-blue-100 p-4 space-y-1">
+    <div className="w-60 bg-blue-100 p-4 space-y-1 min-h-screen">
       {sections.map((section) => (
         <div
           key={section.key}

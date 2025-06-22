@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import { FaFilter, FaSort } from 'react-icons/fa'
 import * as XLSX from 'xlsx'
-import organizersData from '../data/organizer'
+import supplierData from '../data/supplier'
 
 
-export default function OrganizerTable({ activeTab }) {
+export default function SupplierTable({ activeTab }) {
 
-  const [data, setData] = useState(organizersData)
+  const [data, setData] = useState(supplierData)
   const [search, setSearch] = useState('')
   const [editItem, setEditItem] = useState(null)
   const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -95,7 +95,8 @@ export default function OrganizerTable({ activeTab }) {
               <th className="px-0 py-0 cursor-pointer " onClick={() => setSortAsc(!sortAsc)}>
                 # <FaSort className="inline" />
               </th>
-              <th className="px-2 py-2 text-left"  onClick={() => setSortAsc(!sortAsc)}>ORGANIZER NAME <FaSort className="inline ml-2" /></th>
+              <th className="px-2 py-2 text-left"  onClick={() => setSortAsc(!sortAsc)}>SUPPLIER NAME <FaSort className="inline ml-2" /></th>
+              <th className="px-2 py-2 text-left">SERVICES</th>
               <th className="px-2 py-2 text-left">CONTACT PERSON</th>
               <th className="px-2 py-2 text-left">MOBILE NO</th>
               <th className="px-2 py-2 text-left">EMAIL ID</th>
@@ -117,6 +118,7 @@ export default function OrganizerTable({ activeTab }) {
                 </td>
                 <td className="px-2 py-2">{item.id}</td>
                 <td className="px-2 py-2 whitespace-pre-wrap">{item.name}</td>
+                <td className="px-2 py-2">{item.services}</td>
                 <td className="px-2 py-2">{item.contact}</td>
                 <td className="px-2 py-2">{item.phone}</td>
                 <td className="px-2 py-2">{item.email}</td>

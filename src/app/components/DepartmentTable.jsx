@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import { FaFilter, FaSort } from 'react-icons/fa'
 import * as XLSX from 'xlsx'
-import organizersData from '../data/organizer'
+import departmentData from '../data/department'
 
 
-export default function OrganizerTable({ activeTab }) {
+export default function DepartmentTable({ activeTab }) {
 
-  const [data, setData] = useState(organizersData)
+  const [data, setData] = useState(departmentData)
   const [search, setSearch] = useState('')
   const [editItem, setEditItem] = useState(null)
   const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -95,7 +95,7 @@ export default function OrganizerTable({ activeTab }) {
               <th className="px-0 py-0 cursor-pointer " onClick={() => setSortAsc(!sortAsc)}>
                 # <FaSort className="inline" />
               </th>
-              <th className="px-2 py-2 text-left"  onClick={() => setSortAsc(!sortAsc)}>ORGANIZER NAME <FaSort className="inline ml-2" /></th>
+              <th className="px-2 py-2 text-left"  onClick={() => setSortAsc(!sortAsc)}>DEPARTMENTS NAME <FaSort className="inline ml-2" /></th>
               <th className="px-2 py-2 text-left">CONTACT PERSON</th>
               <th className="px-2 py-2 text-left">MOBILE NO</th>
               <th className="px-2 py-2 text-left">EMAIL ID</th>
@@ -173,7 +173,7 @@ export default function OrganizerTable({ activeTab }) {
       {editItem && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-md w-96">
-            <h2 className="text-lg font-bold mb-4">Edit Organizer</h2>
+            <h2 className="text-lg font-bold mb-4">Edit Department</h2>
             <input
               className="w-full mb-2 p-2 border rounded"
               value={editItem.name}

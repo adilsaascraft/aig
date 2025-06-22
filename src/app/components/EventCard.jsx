@@ -25,7 +25,7 @@ export default function EventCard({ event }) {
   }
 
   return (
-    <div className="bg-[#FDFBFB] rounded-xl shadow-md p-4 flex flex-col md:flex-row items-start md:items-center gap-4 relative">
+    <div className="bg-[#FDFBFB] rounded-xl border-1 border-gray-100 p-4 flex flex-col md:flex-row items-start md:items-center gap-4 relative">
       <Toaster position="top-right" />
       
 

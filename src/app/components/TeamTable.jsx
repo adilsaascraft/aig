@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import { FaFilter, FaSort } from 'react-icons/fa'
 import * as XLSX from 'xlsx'
-import organizersData from '../data/organizer'
+import teamData from '../data/team'
 
 
-export default function OrganizerTable({ activeTab }) {
+export default function TeamTable({ activeTab }) {
 
-  const [data, setData] = useState(organizersData)
+  const [data, setData] = useState(teamData)
   const [search, setSearch] = useState('')
   const [editItem, setEditItem] = useState(null)
   const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -95,8 +95,8 @@ export default function OrganizerTable({ activeTab }) {
               <th className="px-0 py-0 cursor-pointer " onClick={() => setSortAsc(!sortAsc)}>
                 # <FaSort className="inline" />
               </th>
-              <th className="px-2 py-2 text-left"  onClick={() => setSortAsc(!sortAsc)}>ORGANIZER NAME <FaSort className="inline ml-2" /></th>
-              <th className="px-2 py-2 text-left">CONTACT PERSON</th>
+              <th className="px-2 py-2 text-left"  onClick={() => setSortAsc(!sortAsc)}>NAME <FaSort className="inline ml-2" /></th>
+              <th className="px-2 py-2 text-left">COMPANY</th>
               <th className="px-2 py-2 text-left">MOBILE NO</th>
               <th className="px-2 py-2 text-left">EMAIL ID</th>
               <th className="px-2 py-2 text-left">Action</th>
@@ -117,7 +117,7 @@ export default function OrganizerTable({ activeTab }) {
                 </td>
                 <td className="px-2 py-2">{item.id}</td>
                 <td className="px-2 py-2 whitespace-pre-wrap">{item.name}</td>
-                <td className="px-2 py-2">{item.contact}</td>
+                <td className="px-2 py-2">{item.company}</td>
                 <td className="px-2 py-2">{item.phone}</td>
                 <td className="px-2 py-2">{item.email}</td>
                 <td className="px-2 py-2">
@@ -173,7 +173,7 @@ export default function OrganizerTable({ activeTab }) {
       {editItem && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-md w-96">
-            <h2 className="text-lg font-bold mb-4">Edit Organizer</h2>
+            <h2 className="text-lg font-bold mb-4">Edit Team</h2>
             <input
               className="w-full mb-2 p-2 border rounded"
               value={editItem.name}
