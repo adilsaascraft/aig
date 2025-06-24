@@ -5,7 +5,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 export default function AddEventForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
-    fullName: '',
+    fullName: 'ID Connect Chapter 2 Pulmonology',
     shortName: '',
     organizer: '',
     department: '',
@@ -13,8 +13,8 @@ export default function AddEventForm({ onClose, onSave }) {
     endDate: '',
     timeZone: '',
     venue: '',
-    city: '',
-    state: '',
+    city: 'Hyderabad',
+    state: 'Telangana',
     country: 'India',
     eventType: 'In-Person',
     registrationType: 'Paid',
@@ -33,8 +33,8 @@ export default function AddEventForm({ onClose, onSave }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-40 flex items-center justify-center">
-      <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-[90vh] relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-screen relative">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black"
           onClick={onClose}
@@ -52,7 +52,7 @@ export default function AddEventForm({ onClose, onSave }) {
               required
               value={formData.fullName}
               onChange={handleChange}
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-300 px-3 py-2 rounded-md"
             />
           </div>
 
@@ -64,7 +64,7 @@ export default function AddEventForm({ onClose, onSave }) {
               required
               value={formData.shortName}
               onChange={handleChange}
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-300 px-3 py-2 rounded-md"
             />
           </div>
 
@@ -75,7 +75,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 name="organizer"
                 value={formData.organizer}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option value="">Select organizer</option>
                 <option value="Org A">Org A</option>
@@ -90,7 +90,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 required
                 value={formData.department}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option value="">Select department</option>
                 <option value="Cardiology">Cardiology</option>
@@ -106,7 +106,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 required
                 value={formData.startDate}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               />
             </div>
 
@@ -118,7 +118,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 required
                 value={formData.endDate}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               />
             </div>
 
@@ -128,7 +128,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 name="timeZone"
                 value={formData.timeZone}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option value="">Select time zone</option>
                 <option value="IST">(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi</option>
@@ -142,7 +142,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 required
                 value={formData.venue}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option value="">Select venue</option>
                 <option value="HICC">HICC</option>
@@ -158,7 +158,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 required
                 value={formData.city}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               />
             </div>
 
@@ -170,7 +170,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 required
                 value={formData.state}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               />
             </div>
 
@@ -180,7 +180,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 name="country"
                 value={formData.country}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option>India</option>
                 <option>USA</option>
@@ -193,7 +193,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 name="eventType"
                 value={formData.eventType}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option>In-Person</option>
                 <option>Virtual</option>
@@ -206,7 +206,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 name="registrationType"
                 value={formData.registrationType}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option>Paid</option>
                 <option>Free</option>
@@ -219,7 +219,7 @@ export default function AddEventForm({ onClose, onSave }) {
                 name="currency"
                 value={formData.currency}
                 onChange={handleChange}
-                className="w-full border px-3 py-2 rounded-md"
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
               >
                 <option>Indian Rupee</option>
                 <option>USD</option>
@@ -229,17 +229,17 @@ export default function AddEventForm({ onClose, onSave }) {
 
           <div className="flex justify-end gap-4 pt-4">
             <button
+              type="submit"
+              className="bg-sky-800 text-white px-6 py-2 rounded-md hover:bg-sky-900"
+            >
+              Save
+            </button>
+            <button
               type="button"
               className="border border-gray-400 px-6 py-2 rounded-md"
               onClick={onClose}
             >
               Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-blue-700 text-white px-6 py-2 rounded-md hover:bg-blue-800"
-            >
-              Save
             </button>
           </div>
         </form>

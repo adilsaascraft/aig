@@ -7,8 +7,15 @@ import DepartmentTable from '@/app/components/DepartmentTable'
 import TeamTable from '@/app/components/TeamTable'
 import SupplierTable from '@/app/components/SupplierTable'
 import sectionMap from '@/app/data/sectionmap'
+import AddEventForm from '@/app/components/AddEventForm'
+import AddVenueForm from '@/app/components/AddVenueForm'
+import AddOrganizerForm from '@/app/components/AddOrganizerForm'
+import AddDepartmentForm from '@/app/components/AddDepartmentForm'
+import AddTeamForm from '@/app/components/AddTeamForm'
+import AddSupplierForm from '@/app/components/AddSupplierForm'
 
 export default function DashboardPage() {
+  const [showAddForm, setShowAddForm] = useState(false);
   const [section, setSection] = useState('event')
   const [activeTab, setActiveTab] = useState('Live')
   const [searchQuery, setSearchQuery] = useState('')
@@ -55,6 +62,22 @@ export default function DashboardPage() {
     }
   }
 
+  // Add model
+
+  const renderAddFormModal = () => {
+  if (!showAddForm) return null;
+
+  if (section === 'event') return <AddEventForm onClose={() => setShowAddForm(false)} />;
+  if (section === 'venues') return <AddVenueForm onClose={() => setShowAddForm(false)} />;
+  if (section === 'hotel') return <AddHotelForm onClose={() => setShowAddForm(false)} />;
+  if (section === 'organizers') return <AddOrganizerForm onClose={() => setShowAddForm(false)} />;
+  if (section === 'departments') return <AddDepartmentForm onClose={() => setShowAddForm(false)} />;
+  if (section === 'suppliers') return <AddSupplierForm onClose={() => setShowAddForm(false)} />;
+  if (section === 'teams') return <AddTeamForm onClose={() => setShowAddForm(false)} />;
+
+  return null;
+};
+
   const renderSectionComponent = () => {
   if (section === 'organizers') {
     return <OrganizerTable activeTab={activeTab} />;
@@ -72,6 +95,9 @@ export default function DashboardPage() {
     return <TeamTable activeTab={activeTab} />;
   }
 
+  
+
+
     return (
       <div className="space-y-6">
         {paginatedItems.length > 0 ? (
@@ -84,12 +110,15 @@ export default function DashboardPage() {
   }
 
   return (
+    <>
     <div className="flex min-h-screen">
       <Sidebar onSectionChange={handleSectionChange} />
       <div className="flex-1 p-8 bg-gray-50">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">{sectionConfig.title}</h1>
-          <button className="bg-sky-800 hover:bg-sky-900 text-white px-4 py-2 rounded-md shadow">
+          <button
+           onClick={() => setShowAddForm(true)}
+           className="bg-sky-800 hover:bg-sky-900 text-white px-4 py-2 rounded-md shadow">
             {sectionConfig.button}
           </button>
         </div>
@@ -128,6 +157,9 @@ export default function DashboardPage() {
         )}
 
         {renderSectionComponent()}
+        
+        
+
 
         {/* Pagination for cards only */}
         {['event', 'venues', 'hotel'].includes(section) && totalPages > 1 && (
@@ -149,5 +181,8 @@ export default function DashboardPage() {
         )}
       </div>
     </div>
+    {renderAddFormModal()}
+
+    </>
   )
 }
