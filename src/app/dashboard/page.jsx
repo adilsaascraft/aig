@@ -6,7 +6,7 @@ import OrganizerTable from '@/app/components/OrganizerTable'
 import DepartmentTable from '@/app/components/DepartmentTable'
 import TeamTable from '@/app/components/TeamTable'
 import SupplierTable from '@/app/components/SupplierTable'
-import sectionMap from '@/app/data/sectionmap'
+import sectionMap from '@/app/data/sectionMap'
 import AddEventForm from '@/app/components/AddEventForm'
 import AddVenueForm from '@/app/components/AddVenueForm'
 import AddOrganizerForm from '@/app/components/AddOrganizerForm'
@@ -112,7 +112,6 @@ export default function DashboardPage() {
   return (
     <>
     <div className="flex min-h-screen">
-      <Sidebar onSectionChange={handleSectionChange} />
       <div className="flex-1 p-8 bg-gray-50">
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-2xl font-bold">{sectionConfig.title}</h1>
