@@ -73,7 +73,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-[#AFBDD1]  to-[#FFFFFF] shadow-lg flex items-center justify-center">
-      <div className="bg-gradient-to-r from-[#FFFFFF]  to-[#FFFFFF] mt-[50px] mb-[50px] shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row w-full max-w-4xl">
+      <div className="h-[880px] bg-gradient-to-r from-[#FFFFFF]  to-[#FFFFFF] mt-[50px] mb-[50px] shadow-lg rounded-2xl overflow-hidden flex flex-col md:flex-row w-full max-w-4xl">
         
         {/* Form Section */}
         <div className="w-full md:w-1/2 p-8">

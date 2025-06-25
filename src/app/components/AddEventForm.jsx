@@ -7,6 +7,9 @@ export default function AddEventForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
     fullName: 'ID Connect Chapter 2 Pulmonology',
     shortName: '',
+    eventCode:'BAAP2025',
+    regNumber:'AIGIMA',
+    uploadImage:'',
     organizer: '',
     department: '',
     startDate: '',
@@ -68,7 +71,45 @@ export default function AddEventForm({ onClose, onSave }) {
             />
           </div>
 
+          <div>
+            <label className="block font-medium">Upload Image *</label>
+             <input
+              type="file"
+              name="uploadImage"
+              value={formData.uploadImage}
+              onChange={handleChange}
+              className="w-full border border-gray-300 px-3 py-2 rounded-md block file:px-4
+                   file:rounded file:border-0 file:text-sm file:font-semibold
+                   file:bg-gray-100 file:text-gray-700
+                   hover:file:bg-gray-200 transition"
+      />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            
+            <div>
+              <label className="block font-medium">Event Code *</label>
+              <input
+                type="text"
+                name="eventCode"
+                required
+                value={formData.eventCode}
+                onChange={handleChange}
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+              />
+            </div>
+            
+            <div>
+              <label className="block font-medium">Registration Number Start from *</label>
+              <input
+                type="text"
+                name="regNumber"
+                required
+                value={formData.regNumber}
+                onChange={handleChange}
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+              />
+            </div>
             <div>
               <label className="block font-medium">Organizer</label>
               <select
