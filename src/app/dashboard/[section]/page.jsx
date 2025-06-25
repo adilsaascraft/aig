@@ -1,7 +1,7 @@
 'use client'
 import { use } from 'react'
 import { useState } from 'react'
-import sectionMap from '@/app/data/sectionmap'
+import sectionMap from '@/app/data/sectionMap'
 import EventCard from '@/app/components/EventCard'
 import OrganizerTable from '@/app/components/OrganizerTable'
 
