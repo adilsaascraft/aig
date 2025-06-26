@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Search } from 'lucide-react'
 import '../globals.css';
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa'
 import events from '../data/events';
@@ -130,9 +131,11 @@ export default function HomeHero() {
                     <p className="text-sm text-gray-600 flex items-center gap-1">
                       <FaMapMarkerAlt className="text-blue-600" /> {event.location}
                     </p>
-                    <button className="mt-2 w-full bg-sky-800 text-white py-2 rounded hover:bg-sky-900">
-                      Register
-                    </button>
+              <Link href={`/register/${event.id}`}>
+                <button className="bg-sky-800 text-white text-sm w-full py-2 rounded-md hover:bg-sky-900">
+                Register
+              </button>
+            </Link>
                   </div>
                 </div>
               ))}
@@ -173,7 +176,7 @@ export default function HomeHero() {
               <p className="text-sm text-gray-600 mb-4 flex items-center gap-2">
                 <FaMapMarkerAlt className="text-blue-600" /> {event.location}
               </p>
-              <button className="bg-sky-800 text-white text-sm w-full py-2 rounded-md hover:bg-blue-900">
+              <button className="bg-sky-800 text-white text-sm w-full py-2 rounded-md hover:bg-sky-900">
                 Register
               </button>
             </div>
