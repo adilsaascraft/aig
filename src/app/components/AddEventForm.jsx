@@ -2,27 +2,31 @@
 
 import { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
 export default function AddEventForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
-    fullName: 'ID Connect Chapter 2 Pulmonology',
-    shortName: '',
-    eventCode:'BAAP2025',
-    regNumber:'AIGIMA',
-    uploadImage:'',
-    organizer: '',
-    department: '',
-    startDate: '',
-    endDate: '',
-    timeZone: '',
-    venue: '',
-    city: 'Hyderabad',
-    state: 'Telangana',
-    country: 'India',
-    eventType: 'In-Person',
-    registrationType: 'Paid',
-    currency: 'Indian Rupee',
-  })
+  fullName: 'ID Connect Chapter 2 Pulmonology',
+  shortName: 'aigbaap25',
+  eventCode: 'BAAP2025',
+  regNumber: '12345',
+  uploadImage: '',
+  organizer: '',
+  department: '',
+  startDate: '',
+  endDate: '',
+  timeZone: '',
+  venue: '',
+  city: 'Hyderabad',
+  state: 'Telangana',
+  country: 'India',
+  eventType: 'In-Person',
+  registrationType: 'Paid',
+  currency: 'Indian Rupee',
+  isAirplaneMode: false,
+});
+
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -78,11 +82,8 @@ export default function AddEventForm({ onClose, onSave }) {
               name="uploadImage"
               value={formData.uploadImage}
               onChange={handleChange}
-              className="w-full border border-gray-300 px-3 py-2 rounded-md block file:px-4
-                   file:rounded file:border-0 file:text-sm file:font-semibold
-                   file:bg-gray-100 file:text-gray-700
-                   hover:file:bg-gray-200 transition"
-      />
+              className="block w-full h-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-white file:h-full file:bg-[#EFEFEF] file:text-gray-700 file:font-medium file:border-1 file:rounded-l-md file:rounded-r-md file:px-4 file:cursor-pointer file:text-center"
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -99,16 +100,21 @@ export default function AddEventForm({ onClose, onSave }) {
               />
             </div>
             
-            <div>
-              <label className="block font-medium">Registration Number Start from *</label>
-              <input
-                type="text"
-                name="regNumber"
-                required
-                value={formData.regNumber}
-                onChange={handleChange}
-                className="w-full border border-gray-300 px-3 py-2 rounded-md"
-              />
+                  <div>
+                    <label className="block font-medium">Registration Number Start from *</label>
+        <div className="flex items-center border border-gray-300 rounded-md">
+          <span className="px-1 text-gray-700">AIGIMA</span>
+          <input
+            type="text"
+            name="regNumber"
+            required
+            value={formData.regNumber}
+            onChange={handleChange}
+            className="w-full px-3 py-2 outline-none"
+            placeholder="Enter registration number"
+          />
+        </div>
+
             </div>
             <div>
               <label className="block font-medium">Organizer</label>
@@ -268,23 +274,41 @@ export default function AddEventForm({ onClose, onSave }) {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 pt-4">
-            <button
-              type="submit"
-              className="bg-sky-800 text-white px-6 py-2 rounded-md hover:bg-sky-900"
-            >
-              Save
-            </button>
-            <button
-              type="button"
-              className="border border-gray-400 px-6 py-2 rounded-md"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
+                    <div className="flex items-center justify-between pt-4">
+            {/* Left side: Label and Switch */}
+            <div className="flex items-center space-x-2">
+              <Label htmlFor="airplane-mode">Event App</Label>
+              <Switch
+                id="airplane-mode"
+                checked={formData.isAirplaneMode}
+                onCheckedChange={(checked) =>
+                  setFormData((prev) => ({ ...prev, isAirplaneMode: checked }))
+                }
+              />
+            </div>
+
+            {/* Right side: Save and Cancel buttons */}
+            <div className="flex gap-4">
+              <button
+                type="submit"
+                className="bg-sky-800 text-white px-6 py-2 rounded-md hover:bg-sky-900"
+              >
+                Save
+              </button>
+
+              <button
+                type="button"
+                className="border border-gray-400 px-6 py-2 rounded-md"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
+
         </form>
       </div>
     </div>
+    
   )
 }

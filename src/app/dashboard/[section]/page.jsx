@@ -4,14 +4,15 @@ import { useState } from 'react'
 import sectionMap from '@/app/data/sectionMap'
 import EventCard from '@/app/components/EventCard'
 import OrganizerTable from '@/app/components/OrganizerTable'
-
-// Import modal form components
+import DepartmentTable from '@/app/components/DepartmentTable'
+import SupplierTable from '@/app/components/SupplierTable'
+import TeamTable from '@/app/components/TeamTable'
+import AddHotelForm from '@/app/components/AddHotelForm'
 import AddEventForm from '@/app/components/AddEventForm'
 import AddVenueForm from '@/app/components/AddVenueForm'
 import AddDepartmentForm from '@/app/components/AddDepartmentForm'
 import AddSupplierForm from '@/app/components/AddSupplierForm'
 import AddTeamForm from '@/app/components/AddTeamForm'
-// import AddHotelForm from '@/app/components/AddHotelForm'
 import AddOrganizerForm from '@/app/components/AddOrganizerForm'
 
 export default function SectionPage({ params }) {
@@ -37,7 +38,7 @@ export default function SectionPage({ params }) {
   const showSearch = ['event', 'venues', 'hotel'].includes(section)
   const showTabs = Array.isArray(config.tabs)
 
-  // Choose correct modal form based on section
+  // 🔁 Modal form rendering
   const renderModalContent = () => {
     switch (section) {
       case 'event':
@@ -46,14 +47,30 @@ export default function SectionPage({ params }) {
         return <AddVenueForm onClose={() => setModalOpen(false)} />
       case 'hotel':
         return <AddHotelForm onClose={() => setModalOpen(false)} />
-        case 'teams':
+      case 'teams':
         return <AddTeamForm onClose={() => setModalOpen(false)} />
-        case 'departments':
+      case 'departments':
         return <AddDepartmentForm onClose={() => setModalOpen(false)} />
-        case 'suppliers':
+      case 'suppliers':
         return <AddSupplierForm onClose={() => setModalOpen(false)} />
-        case 'organizers':
+      case 'organizers':
         return <AddOrganizerForm onClose={() => setModalOpen(false)} />
+      default:
+        return null
+    }
+  }
+
+  // 🔁 Table rendering
+  const renderSectionTable = () => {
+    switch (section) {
+      case 'organizers':
+        return <OrganizerTable activeTab={activeTab} />
+      case 'departments':
+        return <DepartmentTable activeTab={activeTab} />
+      case 'suppliers':
+        return <SupplierTable activeTab={activeTab} />
+      case 'teams':
+        return <TeamTable activeTab={activeTab} />
       default:
         return null
     }
@@ -114,7 +131,7 @@ export default function SectionPage({ params }) {
 
       {/* Section Content */}
       {['organizers', 'departments', 'suppliers', 'teams'].includes(section) ? (
-        <OrganizerTable activeTab={activeTab} />
+        renderSectionTable()
       ) : paginatedItems.length > 0 ? (
         paginatedItems.map((item) => <EventCard key={item.id} event={item} />)
       ) : (

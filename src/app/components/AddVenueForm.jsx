@@ -7,6 +7,7 @@ export default function AddVenueForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
     venueName: 'AIG Hospital',
     address: '',
+    uploadImage:'',
     city: 'Hyderabad',
     state: 'Telangana',
     country: 'India',
@@ -61,6 +62,17 @@ export default function AddVenueForm({ onClose, onSave }) {
               value={formData.address}
               onChange={handleChange}
               className="w-full border border-gray-300 px-3 py-2 rounded-md"
+            />
+          </div>
+
+          <div>
+            <label className="block font-medium">Upload Image *</label>
+             <input
+              type="file"
+              name="uploadImage"
+              value={formData.uploadImage}
+              onChange={handleChange}
+              className="block w-full h-10 text-sm text-gray-900 border border-gray-300 rounded-md bg-white file:h-full file:bg-[#EFEFEF] file:text-gray-700 file:font-medium file:border-1 file:rounded-l-md file:rounded-r-md file:px-4 file:cursor-pointer file:text-center"
             />
           </div>
 
