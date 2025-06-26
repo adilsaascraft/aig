@@ -65,7 +65,7 @@ export default function ComingSoonPage() {
           transition={{ duration: 0.5 }}
         >
           <Image
-            src="/images/comming-soon.png"
+            src="https://res.cloudinary.com/dr5kn8993/image/upload/v1750934396/AIG_Event_Software/comming-soon_taty7m.png"
             alt="Maintenance"
             width={300}
             height={300}
