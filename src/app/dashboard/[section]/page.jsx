@@ -1,7 +1,7 @@
 'use client'
 import { use } from 'react'
 import { useState } from 'react'
-import sectionMap from '../../data/sectionMap'
+import sections from '../../data/sections'
 import EventCard from '@/app/components/EventCard'
 import OrganizerTable from '@/app/components/OrganizerTable'
 import DepartmentTable from '@/app/components/DepartmentTable'
@@ -17,7 +17,7 @@ import AddOrganizerForm from '@/app/components/AddOrganizerForm'
 
 export default function SectionPage({ params }) {
   const { section } = use(params)
-  const config = sectionMap[section] || {}
+  const config = sections[section] || {}
   const [activeTab, setActiveTab] = useState(config.tabs?.[0] || 'All')
   const [search, setSearch] = useState('')
   const [modalOpen, setModalOpen] = useState(false)
