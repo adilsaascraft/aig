@@ -6,7 +6,7 @@ import departmentData from '@/app/data/department'
 import teamData from '@/app/data/team'
 import supplierData from '@/app/data/supplier'
 
-const sectionMap = {
+const sections = {
   event: {
     title: 'Your Events',
     button: '＋ Add Event',
@@ -51,4 +51,4 @@ const sectionMap = {
   },
 }
 
-export default sectionMap
+export default sections

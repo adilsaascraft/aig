@@ -6,13 +6,13 @@ import OrganizerTable from '@/app/components/OrganizerTable'
 import DepartmentTable from '@/app/components/DepartmentTable'
 import TeamTable from '@/app/components/TeamTable'
 import SupplierTable from '@/app/components/SupplierTable'
-import sectionMap from '@/app/data/sectionMap'
 import AddEventForm from '@/app/components/AddEventForm'
 import AddVenueForm from '@/app/components/AddVenueForm'
 import AddOrganizerForm from '@/app/components/AddOrganizerForm'
 import AddDepartmentForm from '@/app/components/AddDepartmentForm'
 import AddTeamForm from '@/app/components/AddTeamForm'
 import AddSupplierForm from '@/app/components/AddSupplierForm'
+import sections from '../data/sections'
 
 export default function DashboardPage() {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -22,7 +22,7 @@ export default function DashboardPage() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
 
-  const sectionConfig = sectionMap[section] || {
+  const sectionConfig = sections[section] || {
     title: 'Unknown Section',
     button: '',
     tabs: [],
@@ -32,9 +32,9 @@ export default function DashboardPage() {
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    if (sectionMap[section]) {
-      setItems(sectionMap[section].data)
-      setActiveTab(sectionMap[section].tabs[0])
+    if (sections[section]) {
+      setItems(sections[section].data)
+      setActiveTab(sections[section].tabs[0])
       setCurrentPage(1)
     }
   }, [section])
@@ -55,7 +55,7 @@ export default function DashboardPage() {
   }
 
   const handleSectionChange = (newSectionKey) => {
-    if (sectionMap[newSectionKey]) {
+    if (sections[newSectionKey]) {
       setSection(newSectionKey)
     } else {
       console.warn(`Unknown section: ${newSectionKey}`)
