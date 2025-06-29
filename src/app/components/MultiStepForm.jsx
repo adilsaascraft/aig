@@ -1,8 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import BasicDetails from '@/app/components/form/BasicDetails'
+import Accompanying from '@/app/components/form/Accompanying'
+import Workshop from '@/app/components/form/Workshop'
+import Confirmation from '@/app/components/form/Confirmation'
 
-export default function RegistrationForm() {
+export default function MultiStepForm({ event }) {
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     prefix: '',
@@ -26,231 +30,370 @@ export default function RegistrationForm() {
     postWorkshop: ''
   })
 
-  const [errors, setErrors] = useState({})
+  const nextStep = () => setStep(step + 1)
+  const prevStep = () => setStep(step - 1)
+  const goToStep = (stepNum) => setStep(stepNum)
 
-  const validateStep1 = () => {
-    const newErrors = {}
-    if (!formData.prefix) newErrors.prefix = 'Required'
-    if (!formData.fullName) newErrors.fullName = 'Required'
-    if (!formData.mobile) newErrors.mobile = 'Required'
-    if (!formData.email) newErrors.email = 'Required'
-    if (!formData.category) newErrors.category = 'Required'
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
-
-  const handleNext = () => {
-    if (step === 1 && !validateStep1()) return
-    setStep(step + 1)
-  }
-
-  const handleBack = () => setStep(step - 1)
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleAccompanyingChange = (index, name, value) => {
-    const newAccompanying = [...formData.accompanying]
-    newAccompanying[index][name] = value
-    setFormData({ ...formData, accompanying: newAccompanying })
-  }
-
-  const addAccompanying = () => {
-    setFormData({
-      ...formData,
-      accompanying: [
-        ...formData.accompanying,
-        { name: '', relation: '', age: '', gender: '', meal: '' }
-      ]
-    })
-  }
-
-  const deleteAccompanying = (index) => {
-    const newAccompanying = formData.accompanying.filter((_, i) => i !== index)
-    setFormData({ ...formData, accompanying: newAccompanying })
-  }
-
+  // ✅ Add the missing handleSubmit function
   const handleSubmit = () => {
-    alert('Submitted!')
-    console.log(formData)
+    // You can send this formData to your backend here
+    console.log('Final Form Data:', formData)
+    alert('Form submitted successfully!')
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-blue-50 rounded-md shadow">
-      {/* Stepper */}
-      <div className="flex justify-between mb-6">
-        {[1, 2, 3, 4].map((s, idx) => (
-          <div key={s} className="flex flex-col items-center">
+    <div className="bg-white p-6 rounded shadow-md">
+      {/* Stepper Header */}
+      {/* Stepper Header */}
+<div className="flex items-center justify-between mb-6 relative">
+  {['Basic Details', 'Accompanying', 'Workshop', 'Confirm & Pay'].map((label, idx) => (
+    <div key={idx} className="flex-1 flex flex-col items-center relative z-10">
+      {/* Circle */}
             <div
-              className={`w-8 h-8 rounded-full text-white flex items-center justify-center mb-1 ${
-                step === s ? 'bg-blue-600' : 'bg-gray-400'
+              className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-sm z-10 ${
+                step === idx + 1
+                  ? 'bg-[#1F5C9E]'
+                  : step > idx + 1
+                  ? 'bg-[#1F5C9E]'
+                  : 'bg-gray-300 text-gray-700'
               }`}
             >
-              {s}
+              {idx + 1}
             </div>
-            <p className="text-sm text-center">
-              {['Basic Details', 'Accompanying', 'Workshop', 'Confirm & Pay'][idx]}
-            </p>
+
+            {/* Label */}
+            <p className="text-sm text-center mt-1">{label}</p>
+
+            {/* Line */}
+            {idx < 3 && (
+              <div
+                className={`absolute top-5 left-[210px] w-full h-1 ${
+                  step > idx + 1 ? 'bg-[#1F5C9E]' : 'bg-gray-300'
+                }`}
+              />
+            )}
           </div>
         ))}
       </div>
 
-      {/* Step 1: Basic Details */}
+
+      {/* Step Components */}
       {step === 1 && (
-        <div className="grid grid-cols-2 gap-4">
-          {[
-            { label: 'Prefix', name: 'prefix' },
-            { label: 'Full Name', name: 'fullName' },
-            { label: 'Mobile No.', name: 'mobile' },
-            { label: 'Email', name: 'email' },
-            { label: 'Affiliation', name: 'affiliation' },
-            { label: 'Designation', name: 'designation' },
-            { label: 'Medical Council Registration', name: 'regNo' },
-            { label: 'Medical Council State', name: 'regState' },
-            { label: 'Primary Address', name: 'address' },
-            { label: 'Country', name: 'country' },
-            { label: 'State', name: 'state' },
-            { label: 'City', name: 'city' },
-            { label: 'Pincode', name: 'pincode' },
-            { label: 'Meal Preference', name: 'meal' },
-            { label: 'Gender', name: 'gender' },
-            { label: 'Registration Category', name: 'category' }
-          ].map(({ label, name }) => (
-            <div key={name}>
-              <label className="block text-sm font-medium">{label}</label>
-              <input
-                name={name}
-                value={formData[name] || ''}
-                onChange={handleInputChange}
-                className="mt-1 p-2 w-full border rounded"
-              />
-              {errors[name] && <p className="text-red-500 text-sm">{errors[name]}</p>}
-            </div>
-          ))}
-        </div>
+        <BasicDetails
+          formData={formData}
+          setFormData={setFormData}
+          nextStep={nextStep}
+        />
       )}
-
-      {/* Step 2: Accompanying */}
       {step === 2 && (
-        <div>
-          {formData.accompanying.map((person, index) => (
-            <div key={index} className="grid grid-cols-2 gap-4 mb-4 border-b pb-4 relative">
-              {[
-                { label: 'Name', name: 'name' },
-                { label: 'Relation', name: 'relation' },
-                { label: 'Age', name: 'age' },
-                { label: 'Gender', name: 'gender' },
-                { label: 'Meal Preference', name: 'meal' }
-              ].map(({ label, name }) => (
-                <div key={name}>
-                  <label className="block text-sm font-medium">{label}</label>
-                  <input
-                    value={person[name]}
-                    onChange={(e) => handleAccompanyingChange(index, name, e.target.value)}
-                    className="mt-1 p-2 w-full border rounded"
-                  />
-                </div>
-              ))}
-              <button
-                onClick={() => deleteAccompanying(index)}
-                className="absolute top-0 right-0 text-red-500"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-          <button
-            onClick={addAccompanying}
-            className="bg-red-500 text-white px-4 py-2 rounded"
-          >
-            + Add More
-          </button>
-        </div>
+        <Accompanying
+          formData={formData}
+          setFormData={setFormData}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
       )}
-
-      {/* Step 3: Workshop Selection */}
       {step === 3 && (
-        <div>
-          <h2 className="font-bold mb-2">Pre-Conference Workshop</h2>
-          {['W1', 'W2', 'W3', 'Not Required'].map((option) => (
-            <label key={option} className="block">
-              <input
-                type="radio"
-                name="preWorkshop"
-                value={option}
-                checked={formData.preWorkshop === option}
-                onChange={handleInputChange}
-              />{' '}
-              {option}
-            </label>
-          ))}
-          <h2 className="font-bold mt-4 mb-2">Post-Conference Workshop</h2>
-          {['W1', 'W2', 'W3', 'Not Required'].map((option) => (
-            <label key={option} className="block">
-              <input
-                type="radio"
-                name="postWorkshop"
-                value={option}
-                checked={formData.postWorkshop === option}
-                onChange={handleInputChange}
-              />{' '}
-              {option}
-            </label>
-          ))}
-        </div>
+        <Workshop
+          formData={formData}
+          setFormData={setFormData}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
       )}
-
-      {/* Step 4: Confirm & Pay */}
       {step === 4 && (
-        <div className="text-sm space-y-4">
-          <div>
-            <h3 className="font-bold">Basic Details</h3>
-            <pre>{JSON.stringify(formData, null, 2)}</pre>
-          </div>
-          <div>
-            <h3 className="font-bold">Accompanying Persons</h3>
-            <pre>{JSON.stringify(formData.accompanying, null, 2)}</pre>
-          </div>
-          <div>
-            <h3 className="font-bold">Workshops</h3>
-            <p>Pre: {formData.preWorkshop}</p>
-            <p>Post: {formData.postWorkshop}</p>
-          </div>
-          <div className="mt-4">
-            <button
-              onClick={handleSubmit}
-              className="bg-blue-600 text-white px-4 py-2 rounded"
-            >
-              Confirm & Pay
-            </button>
-          </div>
-        </div>
+        <Confirmation
+          formData={formData}
+          onSubmit={handleSubmit}
+          onEdit={(step) => setStep(step)}
+        />
       )}
-
-      {/* Navigation */}
-      <div className="mt-6 flex justify-between">
-        {step > 1 && (
-          <button
-            onClick={handleBack}
-            className="bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            Back
-          </button>
-        )}
-        {step < 4 && (
-          <button
-            onClick={handleNext}
-            className="bg-blue-600 text-white px-4 py-2 rounded ml-auto"
-          >
-            Next
-          </button>
-        )}
-      </div>
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client'
+
+// import { useState } from 'react'
+
+// export default function RegistrationForm() {
+//   const [step, setStep] = useState(1)
+//   const [formData, setFormData] = useState({
+//     prefix: '',
+//     fullName: '',
+//     mobile: '',
+//     email: '',
+//     affiliation: '',
+//     designation: '',
+//     regNo: '',
+//     regState: '',
+//     address: '',
+//     country: 'India',
+//     state: '',
+//     city: '',
+//     pincode: '',
+//     meal: '',
+//     gender: '',
+//     category: '',
+//     accompanying: [],
+//     preWorkshop: '',
+//     postWorkshop: ''
+//   })
+
+//   const [errors, setErrors] = useState({})
+
+//   const validateStep1 = () => {
+//     const newErrors = {}
+//     if (!formData.prefix) newErrors.prefix = 'Required'
+//     if (!formData.fullName) newErrors.fullName = 'Required'
+//     if (!formData.mobile) newErrors.mobile = 'Required'
+//     if (!formData.email) newErrors.email = 'Required'
+//     if (!formData.category) newErrors.category = 'Required'
+//     setErrors(newErrors)
+//     return Object.keys(newErrors).length === 0
+//   }
+
+//   const handleNext = () => {
+//     if (step === 1 && !validateStep1()) return
+//     setStep(step + 1)
+//   }
+
+//   const handleBack = () => setStep(step - 1)
+
+//   const handleInputChange = (e) => {
+//     const { name, value } = e.target
+//     setFormData((prev) => ({ ...prev, [name]: value }))
+//   }
+
+//   const handleAccompanyingChange = (index, name, value) => {
+//     const newAccompanying = [...formData.accompanying]
+//     newAccompanying[index][name] = value
+//     setFormData({ ...formData, accompanying: newAccompanying })
+//   }
+
+//   const addAccompanying = () => {
+//     setFormData({
+//       ...formData,
+//       accompanying: [
+//         ...formData.accompanying,
+//         { name: '', relation: '', age: '', gender: '', meal: '' }
+//       ]
+//     })
+//   }
+
+//   const deleteAccompanying = (index) => {
+//     const newAccompanying = formData?.accompanying.filter((_, i) => i !== index)
+//     setFormData({ ...formData, accompanying: newAccompanying })
+//   }
+
+//   const handleSubmit = () => {
+//     alert('Submitted!')
+//     console.log(formData)
+//   }
+
+//   return (
+//     <div className="max-w-4xl mx-auto p-6 bg-blue-50 rounded-md shadow">
+//       {/* Stepper */}
+//       <div className="flex justify-between mb-6">
+//         {[1, 2, 3, 4].map((s, idx) => (
+//           <div key={s} className="flex flex-col items-center">
+//             <div
+//               className={`w-8 h-8 rounded-full text-white flex items-center justify-center mb-1 ${
+//                 step === s ? 'bg-blue-600' : 'bg-gray-400'
+//               }`}
+//             >
+//               {s}
+//             </div>
+//             <p className="text-sm text-center">
+//               {['Basic Details', 'Accompanying', 'Workshop', 'Confirm & Pay'][idx]}
+//             </p>
+//           </div>
+//         ))}
+//       </div>
+
+//       {/* Step 1: Basic Details */}
+//       {step === 1 && (
+//         <div className="grid grid-cols-2 gap-4">
+//           {[
+//             { label: 'Prefix', name: 'prefix' },
+//             { label: 'Full Name', name: 'fullName' },
+//             { label: 'Mobile No.', name: 'mobile' },
+//             { label: 'Email', name: 'email' },
+//             { label: 'Affiliation', name: 'affiliation' },
+//             { label: 'Designation', name: 'designation' },
+//             { label: 'Medical Council Registration', name: 'regNo' },
+//             { label: 'Medical Council State', name: 'regState' },
+//             { label: 'Primary Address', name: 'address' },
+//             { label: 'Country', name: 'country' },
+//             { label: 'State', name: 'state' },
+//             { label: 'City', name: 'city' },
+//             { label: 'Pincode', name: 'pincode' },
+//             { label: 'Meal Preference', name: 'meal' },
+//             { label: 'Gender', name: 'gender' },
+//             { label: 'Registration Category', name: 'category' }
+//           ].map(({ label, name }) => (
+//             <div key={name}>
+//               <label className="block text-sm font-medium">{label}</label>
+//               <input
+//                 name={name}
+//                 value={formData[name] || ''}
+//                 onChange={handleInputChange}
+//                 className="mt-1 p-2 w-full border rounded"
+//               />
+//               {errors[name] && <p className="text-red-500 text-sm">{errors[name]}</p>}
+//             </div>
+//           ))}
+//         </div>
+//       )}
+
+//       {/* Step 2: Accompanying */}
+//       {step === 2 && (
+//         <div>
+//           {formData.accompanying.map((person, index) => (
+//             <div key={index} className="grid grid-cols-2 gap-4 mb-4 border-b pb-4 relative">
+//               {[
+//                 { label: 'Name', name: 'name' },
+//                 { label: 'Relation', name: 'relation' },
+//                 { label: 'Age', name: 'age' },
+//                 { label: 'Gender', name: 'gender' },
+//                 { label: 'Meal Preference', name: 'meal' }
+//               ].map(({ label, name }) => (
+//                 <div key={name}>
+//                   <label className="block text-sm font-medium">{label}</label>
+//                   <input
+//                     value={person[name]}
+//                     onChange={(e) => handleAccompanyingChange(index, name, e.target.value)}
+//                     className="mt-1 p-2 w-full border rounded"
+//                   />
+//                 </div>
+//               ))}
+//               <button
+//                 onClick={() => deleteAccompanying(index)}
+//                 className="absolute top-0 right-0 text-red-500"
+//               >
+//                 Delete
+//               </button>
+//             </div>
+//           ))}
+//           <button
+//             onClick={addAccompanying}
+//             className="bg-red-500 text-white px-4 py-2 rounded"
+//           >
+//             + Add More
+//           </button>
+//         </div>
+//       )}
+
+//       {/* Step 3: Workshop Selection */}
+//       {step === 3 && (
+//         <div>
+//           <h2 className="font-bold mb-2">Pre-Conference Workshop</h2>
+//           {['W1', 'W2', 'W3', 'Not Required'].map((option) => (
+//             <label key={option} className="block">
+//               <input
+//                 type="radio"
+//                 name="preWorkshop"
+//                 value={option}
+//                 checked={formData.preWorkshop === option}
+//                 onChange={handleInputChange}
+//               />{' '}
+//               {option}
+//             </label>
+//           ))}
+//           <h2 className="font-bold mt-4 mb-2">Post-Conference Workshop</h2>
+//           {['W1', 'W2', 'W3', 'Not Required'].map((option) => (
+//             <label key={option} className="block">
+//               <input
+//                 type="radio"
+//                 name="postWorkshop"
+//                 value={option}
+//                 checked={formData.postWorkshop === option}
+//                 onChange={handleInputChange}
+//               />{' '}
+//               {option}
+//             </label>
+//           ))}
+//         </div>
+//       )}
+
+//       {/* Step 4: Confirm & Pay */}
+//       {step === 4 && (
+//         <div className="text-sm space-y-4">
+//           <div>
+//             <h3 className="font-bold">Basic Details</h3>
+//             <pre>{JSON.stringify(formData, null, 2)}</pre>
+//           </div>
+//           <div>
+//             <h3 className="font-bold">Accompanying Persons</h3>
+//             <pre>{JSON.stringify(formData.accompanying, null, 2)}</pre>
+//           </div>
+//           <div>
+//             <h3 className="font-bold">Workshops</h3>
+//             <p>Pre: {formData.preWorkshop}</p>
+//             <p>Post: {formData.postWorkshop}</p>
+//           </div>
+//           <div className="mt-4">
+//             <button
+//               onClick={handleSubmit}
+//               className="bg-blue-600 text-white px-4 py-2 rounded"
+//             >
+//               Confirm & Pay
+//             </button>
+//           </div>
+//         </div>
+//       )}
+
+//       {/* Navigation */}
+//       <div className="mt-6 flex justify-between">
+//         {step > 1 && (
+//           <button
+//             onClick={handleBack}
+//             className="bg-gray-500 text-white px-4 py-2 rounded"
+//           >
+//             Back
+//           </button>
+//         )}
+//         {step < 4 && (
+//           <button
+//             onClick={handleNext}
+//             className="bg-blue-800 text-white px-4 py-2 rounded ml-auto"
+//           >
+//             Save&Continue
+//           </button>
+//         )}
+//       </div>
+//     </div>
+//   )
+// }
 
 
 

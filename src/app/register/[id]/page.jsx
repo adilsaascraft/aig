@@ -1,4 +1,5 @@
 'use client'
+
 import { useParams } from 'next/navigation'
 import events from '@/app/data/events'
 import MultiStepForm from '@/app/components/MultiStepForm'
@@ -20,6 +21,7 @@ export default function RegisterPage() {
         </div>
       </div>
 
+      {/* 👇 Use updated MultiStepForm with split steps */}
       <MultiStepForm event={event} />
     </div>
   )

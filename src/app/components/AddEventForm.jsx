@@ -7,10 +7,10 @@ import { Switch } from "@/components/ui/switch"
 
 export default function AddEventForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
-  fullName: 'ID Connect Chapter 2 Pulmonology',
-  shortName: 'aigbaap25',
-  eventCode: 'BAAP2025',
-  regNumber: '12345',
+  fullName: '',
+  shortName: '',
+  eventCode: '',
+  regNumber: '',
   uploadImage: '',
   organizer: '',
   department: '',
@@ -18,9 +18,9 @@ export default function AddEventForm({ onClose, onSave }) {
   endDate: '',
   timeZone: '',
   venue: '',
-  city: 'Hyderabad',
-  state: 'Telangana',
-  country: 'India',
+  city: '',
+  state: '',
+  country: '',
   eventType: 'In-Person',
   registrationType: 'Paid',
   currency: 'Indian Rupee',
@@ -56,6 +56,7 @@ export default function AddEventForm({ onClose, onSave }) {
             <input
               type="text"
               name="fullName"
+              placeholder='Enter event name'
               required
               value={formData.fullName}
               onChange={handleChange}
