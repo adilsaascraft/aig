@@ -1,6 +1,7 @@
 import eventData from '@/app/data/event'
 import venueData from '@/app/data/venues'
 import hotelData from '@/app/data/hotel'
+import roomCategoryData from '@/app/data/roomCategory'
 import organizersData from '@/app/data/organizer'
 import departmentData from '@/app/data/department'
 import teamData from '@/app/data/team'
@@ -9,7 +10,7 @@ import supplierData from '@/app/data/supplier'
 const sections = {
   event: {
     title: 'Your Events',
-    button: '＋ Add Event',
+    button: 'Create Event',
     tabs: ['Running', 'Live', 'Drafts', 'Past', 'Cancelled', 'All', 'Trash'],
     data: eventData,
   },
@@ -24,6 +25,12 @@ const sections = {
     button: '＋ Add Hotel',
     tabs: ['Active', 'Inactive', 'All', 'Trash'],
     data: hotelData,
+  },
+  category: {
+    title: 'Your Rooms',
+    button: '＋ Add Rooms',
+    tabs: ['Active', 'Inactive', 'All', 'Trash'],
+    data: roomCategoryData,
   },
   organizers: {
     title: 'Your Organizers',

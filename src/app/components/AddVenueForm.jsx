@@ -5,12 +5,12 @@ import { AiOutlineClose } from 'react-icons/ai'
 
 export default function AddVenueForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
-    venueName: 'AIG Hospital',
+    venueName: '',
     address: '',
     uploadImage:'',
-    city: 'Hyderabad',
-    state: 'Telangana',
-    country: 'India',
+    city: '',
+    state: '',
+    country: '',
     website: '',
     googleMapLink: '',
     distanceFromAirport: '',
@@ -30,7 +30,7 @@ export default function AddVenueForm({ onClose, onSave }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-start justify-end backdrop-blur-sm">
       <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-screen relative">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black"

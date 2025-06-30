@@ -40,8 +40,8 @@ export default function AddEventForm({ onClose, onSave }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-screen relative">
+    <div className="fixed inset-0 z-50 flex items-start justify-end backdrop-blur-[0.5px]">
+  <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-screen relative animate-slide-in-right">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black"
           onClick={onClose}

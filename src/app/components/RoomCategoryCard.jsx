@@ -1,11 +1,11 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { MapPin, Link as LinkIcon } from 'lucide-react'
+import { Calendar, MapPin, MoreVertical, Link as LinkIcon } from 'lucide-react'
 import toast, { Toaster } from 'react-hot-toast'
-import { FaChevronDown } from 'react-icons/fa'
+import { FaChevronDown, FaHotel} from 'react-icons/fa'
 
-export default function VenueCard({ venue }) {
+export default function RoomCategoryCard({ cat }) {
   const [showDropdown, setShowDropdown] = useState(false)
   const dropdownRef = useRef()
 
@@ -33,11 +33,11 @@ export default function VenueCard({ venue }) {
     <div className="bg-[#FDFBFB] rounded-xl border border-gray-200 p-4 flex flex-col md:flex-row items-start md:items-center gap-4 relative">
       <Toaster position="top-right" />
 
-      {/* Venue Image */}
+      {/* Event Image */}
       <div className="min-w-[120px] h-[160px] relative">
         <Image
-          src={venue.image}
-          alt={venue.title}
+          src={cat.image}
+          alt={cat.title}
           width={120}
           height={160}
           className="rounded-md object-cover"
@@ -46,30 +46,34 @@ export default function VenueCard({ venue }) {
 
       {/* Content */}
       <div className="flex-1 w-full">
-        <h2 className="text-xl font-bold text-blue-800">{venue.title}</h2>
+        <h2 className="text-xl font-bold text-blue-800">{cat.title}</h2>
 
         <div className="mt-1">
           <span className="text-xs font-semibold bg-green-100 text-green-700 px-2 py-1 rounded">
-            {venue.status}
+            {cat.status}
           </span>
         </div>
 
         <div className="mt-3 flex flex-col gap-2 text-sm text-gray-800">
           <div className="flex items-center gap-2">
-            <MapPin size={16} />
-            <span>{venue.location}</span>
+            <FaHotel size={16} />
+            <span>{cat.roomType}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Image
-              src={venue.lastModifiedBy.avatar}
-              alt="Avatar"
-              width={20}
-              height={20}
-              className="rounded-full"
-            />
-            <span className="text-gray-600 text-sm">
-              Last modified {venue.lastModifiedBy.timeAgo}
-            </span>
+            <FaHotel size={16} />
+            <span>{cat.roomCategory}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaHotel size={16} />
+            <span>{cat.roomOccupancy}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={16} />
+            <span>{cat.bedType}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <MapPin size={16} />
+            <span>{cat.basicAmenities}</span>
           </div>
         </div>
       </div>
@@ -77,6 +81,7 @@ export default function VenueCard({ venue }) {
       {/* Manage + Dropdown */}
       <div className="flex flex-col items-end gap-2 absolute top-[30px] right-[30px] z-10">
         <div className="relative" ref={dropdownRef}>
+          {/* Combined Button Group */}
           <div className="flex items-center border border-blue-700 rounded-md overflow-hidden divide-x bg-white">
             <button
               onClick={handleManage}
@@ -92,6 +97,7 @@ export default function VenueCard({ venue }) {
             </button>
           </div>
 
+          {/* Dropdown Menu */}
           {showDropdown && (
             <div className="absolute right-0 mt-2 bg-white border border-gray-200 rounded-md shadow-md w-32 z-20">
               <button
@@ -109,17 +115,6 @@ export default function VenueCard({ venue }) {
             </div>
           )}
         </div>
-
-        {/* Registration Link */}
-        <a
-          href={venue.registrationLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 text-[#1F5C9E] mr-5 text-sm hover:underline"
-        >
-          <LinkIcon size={14} />
-          Venue Website
-        </a>
       </div>
     </div>
   )
