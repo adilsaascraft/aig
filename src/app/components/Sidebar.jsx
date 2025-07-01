@@ -12,8 +12,8 @@ const sections = [
   { label: 'Venues', key: 'venues', icon: <FaMapMarkerAlt /> },
   { label: 'Organizers', key: 'organizers', icon: <FaUser /> },
   { label: 'Departments', key: 'departments', icon: <FaUniversity /> },
-  { label: 'Hotels', key: 'hotel', icon: <FaHotel />, hasSubMenu: true },
   { label: 'Teams', key: 'teams', icon: <FaUsers /> },
+  { label: 'Hotels', key: 'hotel', icon: <FaHotel />, hasSubMenu: true },
   { label: 'Suppliers', key: 'suppliers', icon: <FaTruck /> },
 ]
 

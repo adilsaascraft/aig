@@ -7,26 +7,25 @@ import { Switch } from "@/components/ui/switch"
 
 export default function AddEventForm({ onClose, onSave }) {
   const [formData, setFormData] = useState({
-  fullName: '',
-  shortName: '',
-  eventCode: '',
-  regNumber: '',
-  uploadImage: '',
-  organizer: '',
-  department: '',
-  startDate: '',
-  endDate: '',
-  timeZone: '',
-  venue: '',
-  city: '',
-  state: '',
-  country: '',
-  eventType: 'In-Person',
-  registrationType: 'Paid',
-  currency: 'Indian Rupee',
-  isAirplaneMode: false,
-});
-
+    fullName: '',
+    shortName: '',
+    eventCode: '',
+    regNumber: '',
+    uploadImage: '',
+    organizer: '',
+    department: '',
+    startDate: '',
+    endDate: '',
+    timeZone: '',
+    venue: '',
+    city: '',
+    state: '',
+    country: '',
+    eventType: 'In-Person',
+    registrationType: 'Paid',
+    currency: 'Indian Rupee',
+    isAirplaneMode: false,
+  });
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -41,7 +40,9 @@ export default function AddEventForm({ onClose, onSave }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-end backdrop-blur-[0.5px]">
-  <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-screen relative animate-slide-in-right">
+      <div className="bg-white w-full max-w-2xl p-6 rounded-md shadow-lg overflow-y-auto max-h-screen relative animate-slide-in-right">
+        
+        {/* Close Icon */}
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-black"
           onClick={onClose}
@@ -50,7 +51,10 @@ export default function AddEventForm({ onClose, onSave }) {
         </button>
 
         <h2 className="text-xl font-semibold mb-4">Add Event</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+
+        <form onSubmit={handleSubmit} className="space-y-4 pb-28"> {/* extra bottom padding for sticky footer */}
+
+          {/* Input Fields */}
           <div>
             <label className="block font-medium">Event Full Name *</label>
             <input
@@ -69,6 +73,7 @@ export default function AddEventForm({ onClose, onSave }) {
             <input
               type="text"
               name="shortName"
+              placeholder='Event short name'
               required
               value={formData.shortName}
               onChange={handleChange}
@@ -78,7 +83,7 @@ export default function AddEventForm({ onClose, onSave }) {
 
           <div>
             <label className="block font-medium">Upload Image *</label>
-             <input
+            <input
               type="file"
               name="uploadImage"
               value={formData.uploadImage}
@@ -88,35 +93,32 @@ export default function AddEventForm({ onClose, onSave }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            
             <div>
               <label className="block font-medium">Event Code *</label>
               <input
                 type="text"
                 name="eventCode"
+                placeholder='Event code'
                 required
                 value={formData.eventCode}
                 onChange={handleChange}
                 className="w-full border border-gray-300 px-3 py-2 rounded-md"
               />
             </div>
-            
-                  <div>
-                    <label className="block font-medium">Registration Number Start from *</label>
-        <div className="flex items-center border border-gray-300 rounded-md">
-          <span className="px-1 text-gray-700">AIGIMA</span>
-          <input
-            type="text"
-            name="regNumber"
-            required
-            value={formData.regNumber}
-            onChange={handleChange}
-            className="w-full px-3 py-2 outline-none"
-            placeholder="Enter registration number"
-          />
-        </div>
 
+            <div>
+              <label className="block font-medium">Registration Number Start from *</label>
+              <input
+                type="text"
+                name="regNumber"
+                placeholder='Registration Number'
+                required
+                value={formData.regNumber}
+                onChange={handleChange}
+                className="w-full border border-gray-300 px-3 py-2 rounded-md"
+              />
             </div>
+
             <div>
               <label className="block font-medium">Organizer</label>
               <select
@@ -275,8 +277,8 @@ export default function AddEventForm({ onClose, onSave }) {
             </div>
           </div>
 
-                    <div className="flex items-center justify-between pt-4">
-            {/* Left side: Label and Switch */}
+          {/* Switch */}
+          <div className="flex items-center justify-between pt-4">
             <div className="flex items-center space-x-2">
               <Label htmlFor="airplane-mode">Event App</Label>
               <Switch
@@ -287,29 +289,27 @@ export default function AddEventForm({ onClose, onSave }) {
                 }
               />
             </div>
+          </div>
 
-            {/* Right side: Save and Cancel buttons */}
-            <div className="flex gap-4">
-              <button
-                type="submit"
-                className="bg-sky-800 text-white px-6 py-2 rounded-md hover:bg-sky-900"
-              >
-                Save
-              </button>
-
-              <button
-                type="button"
-                className="border border-gray-400 px-6 py-2 rounded-md"
-                onClick={onClose}
-              >
-                Cancel
-              </button>
-            </div>
+          {/* Sticky Footer Buttons */}
+          <div className="sticky bottom-0 left-0 right-0 bg-white border-t pt-4 pb-4 mt-6 flex justify-between items-center z-10">
+            <button
+              type="button"
+              className="ml-4 border border-gray-400 px-6 py-2 rounded-md"
+              onClick={onClose}
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              className="mr-4 bg-sky-800 text-white px-6 py-2 rounded-md hover:bg-sky-900"
+            >
+              Save
+            </button>
           </div>
 
         </form>
       </div>
     </div>
-    
   )
 }

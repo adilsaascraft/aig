@@ -21,7 +21,7 @@ export default function Login() {
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
-  // Simulate processing time (min 2 seconds)
+  // Simulate processing time (min 5 seconds)
   await delay(5000);
 
   if (email === hardcodedEmail && password === hardcodedPassword) {
