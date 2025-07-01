@@ -18,6 +18,7 @@ import AddDepartmentForm from '@/app/components/AddDepartmentForm'
 import AddSupplierForm from '@/app/components/AddSupplierForm'
 import AddTeamForm from '@/app/components/AddTeamForm'
 import AddOrganizerForm from '@/app/components/AddOrganizerForm'
+import AddRoomForm from '@/app/components/AddRoomForm'
 
 export default function SectionPage({ params }) {
   const { section } = use(params)
@@ -51,6 +52,7 @@ export default function SectionPage({ params }) {
       case 'departments': return <AddDepartmentForm onClose={() => setModalOpen(false)} />
       case 'suppliers': return <AddSupplierForm onClose={() => setModalOpen(false)} />
       case 'organizers': return <AddOrganizerForm onClose={() => setModalOpen(false)} />
+      case 'category': return <AddRoomForm onClose={() => setModalOpen(false)} />
       default: return null
     }
   }
@@ -71,6 +73,7 @@ export default function SectionPage({ params }) {
       case 'departments': return <DepartmentTable activeTab={activeTab} />
       case 'suppliers': return <SupplierTable activeTab={activeTab} />
       case 'teams': return <TeamTable activeTab={activeTab} />
+      case 'category': return <RoomCategoryCard activeTab={activeTab} />
       default: return null
     }
   }
@@ -125,7 +128,7 @@ export default function SectionPage({ params }) {
         </div>
       )}
 
-      {['organizers', 'departments', 'suppliers', 'teams'].includes(section) ? (
+      {['organizers', 'departments', 'suppliers', 'teams', 'category'].includes(section) ? (
         renderSectionTable()
       ) : paginatedItems.length > 0 ? (
         paginatedItems.map(renderCard)

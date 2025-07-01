@@ -5,7 +5,7 @@ const hotelData = [
       'https://res.cloudinary.com/dr5kn8993/image/upload/v1750330467/AIG_Event_Software/DummyImages/event4_btqkhq.jpg',
     title: 'The Park Hyderabad',
     status: 'Active',
-    category: '⭐⭐⭐⭐⭐⭐⭐',
+    category: '⭐⭐⭐⭐⭐',
     location: 'New Delhi, India',
   },
   {
@@ -14,7 +14,7 @@ const hotelData = [
       'https://res.cloudinary.com/dr5kn8993/image/upload/v1750330467/AIG_Event_Software/DummyImages/event4_btqkhq.jpg',
     title: 'Taj Krishna',
     status: 'Inactive',
-    category: '⭐⭐⭐⭐⭐',
+    category: '⭐⭐⭐⭐',
     location: 'Delhi, India',
   },
   {

@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   FaCalendarAlt, FaMapMarkerAlt, FaUniversity,
   FaUser, FaHotel, FaUsers, FaTruck, FaChevronDown,
@@ -19,22 +19,14 @@ const sections = [
 
 const hotelSubMenu = [
   { label: 'Hotel', path: '/dashboard/hotel' },
-  { label: 'Room Category', path: '/dashboard/category' }
+  { label: 'Room Category', path: '/dashboard/category' },
 ]
 
 export default function Sidebar() {
   const pathname = usePathname()
   const currentMain = pathname.split('/')[2]
-  const currentSub = pathname.split('/')[3]
-  const [expanded, setExpanded] = useState(null)
 
-  useEffect(() => {
-    if (pathname.startsWith('/dashboard/hotel/')) {
-      setExpanded('hotel')
-    } else {
-      setExpanded(null)
-    }
-  }, [pathname])
+  const [expanded, setExpanded] = useState(null)
 
   const toggleDropdown = (key) => {
     setExpanded(prev => (prev === key ? null : key))
@@ -45,7 +37,7 @@ export default function Sidebar() {
       {sections.map(section => {
         const isDropdownOpen = expanded === section.key
         const isActive = section.hasSubMenu
-          ? pathname.startsWith('/dashboard/hotel/')
+          ? pathname.startsWith('/dashboard/hotel') || pathname === '/dashboard/category'
           : currentMain === section.key
 
         return (
@@ -63,30 +55,21 @@ export default function Sidebar() {
                   : 'hover:bg-gray-300 text-gray-700'
               }`}
             >
-              {/* Regular Link for non-dropdown sections */}
               {!section.hasSubMenu ? (
                 <Link
                   href={`/dashboard/${section.key}`}
                   className="flex items-center gap-3 flex-grow"
                 >
-                  <span className={`transition-colors ${isActive ? 'bg-white' : 'group-hover:text-gray-900 text-gray-500'}`}>
-                    {section.icon}
-                  </span>
+                  <span className="text-gray-500 group-hover:text-gray-900">{section.icon}</span>
                   <span>{section.label}</span>
                 </Link>
               ) : (
-                // Just clickable label for dropdown section (Hotels)
                 <div className="flex items-center gap-3 flex-grow">
-                  <span className={`transition-colors ${isActive
-                  ? 'bg-white shadow-md font-semibold text-sky-800'
-                  : 'hover:bg-gray-300 text-gray-700'}`}>
-                    {section.icon}
-                  </span>
+                  <span>{section.icon}</span>
                   <span>{section.label}</span>
                 </div>
               )}
 
-              {/* Dropdown Icon */}
               {section.hasSubMenu && (
                 <FaChevronDown
                   className={`transition-transform duration-200 ml-2 ${
@@ -106,9 +89,9 @@ export default function Sidebar() {
                       key={sub.path}
                       href={sub.path}
                       className={`block px-3 py-2 rounded text-sm transition-colors ${
-                  isSubActive
-                  ? 'bg-white shadow-md font-semibold text-sky-800'
-                  : 'hover:bg-gray-300 text-gray-700'
+                        isSubActive
+                          ? 'bg-white shadow-md font-semibold text-sky-800'
+                          : 'hover:bg-gray-300 text-gray-700'
                       }`}
                     >
                       {sub.label}
@@ -123,6 +106,164 @@ export default function Sidebar() {
     </div>
   )
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 'use client'
+// import Link from 'next/link'
+// import { usePathname } from 'next/navigation'
+// import { useState, useEffect } from 'react'
+// import {
+//   FaCalendarAlt, FaMapMarkerAlt, FaUniversity,
+//   FaUser, FaHotel, FaUsers, FaTruck, FaChevronDown,
+// } from 'react-icons/fa'
+
+// const sections = [
+//   { label: 'Events', key: 'event', icon: <FaCalendarAlt /> },
+//   { label: 'Venues', key: 'venues', icon: <FaMapMarkerAlt /> },
+//   { label: 'Organizers', key: 'organizers', icon: <FaUser /> },
+//   { label: 'Departments', key: 'departments', icon: <FaUniversity /> },
+//   { label: 'Hotels', key: 'hotel', icon: <FaHotel />, hasSubMenu: true },
+//   { label: 'Teams', key: 'teams', icon: <FaUsers /> },
+//   { label: 'Suppliers', key: 'suppliers', icon: <FaTruck /> },
+// ]
+
+// const hotelSubMenu = [
+//   { label: 'Hotel', path: '/dashboard/hotel' },
+//   { label: 'Room Category', path: '/dashboard/category' }
+// ]
+
+// export default function Sidebar() {
+//   const pathname = usePathname()
+//   const currentMain = pathname.split('/')[2]
+//   const currentSub = pathname.split('/')[3]
+//   const [expanded, setExpanded] = useState(null)
+
+//   useEffect(() => {
+//     if (pathname.startsWith('/dashboard/hotel/')) {
+//       setExpanded('hotel')
+//     } else {
+//       setExpanded(null)
+//     }
+//   }, [pathname])
+
+//   const toggleDropdown = (key) => {
+//     setExpanded(prev => (prev === key ? null : key))
+//   }
+
+//   return (
+//     <div className="w-60 bg-blue-100 p-4 space-y-1 min-h-screen">
+//       {sections.map(section => {
+//         const isDropdownOpen = expanded === section.key
+//         const isActive = section.hasSubMenu
+//           ? pathname.startsWith('/dashboard/hotel/')
+//           : currentMain === section.key
+
+//         return (
+//           <div key={section.key}>
+//             {/* Main Tab */}
+//             <div
+//               onClick={() =>
+//                 section.hasSubMenu
+//                   ? toggleDropdown(section.key)
+//                   : null
+//               }
+//               className={`group flex items-center justify-between p-3 rounded-md cursor-pointer transition-colors ${
+//                 isActive
+//                   ? 'bg-white shadow-md font-semibold text-sky-800'
+//                   : 'hover:bg-gray-300 text-gray-700'
+//               }`}
+//             >
+//               {/* Regular Link for non-dropdown sections */}
+//               {!section.hasSubMenu ? (
+//                 <Link
+//                   href={`/dashboard/${section.key}`}
+//                   className="flex items-center gap-3 flex-grow"
+//                 >
+//                   <span className={`transition-colors ${isActive ? 'bg-white' : 'group-hover:text-gray-900 text-gray-500'}`}>
+//                     {section.icon}
+//                   </span>
+//                   <span>{section.label}</span>
+//                 </Link>
+//               ) : (
+//                 // Just clickable label for dropdown section (Hotels)
+//                 <div className="flex items-center gap-3 flex-grow">
+//                   <span className={`transition-colors ${isActive
+//                   ? 'bg-white shadow-md font-semibold text-sky-800'
+//                   : 'hover:bg-gray-300 text-gray-700'}`}>
+//                     {section.icon}
+//                   </span>
+//                   <span>{section.label}</span>
+//                 </div>
+//               )}
+
+//               {/* Dropdown Icon */}
+//               {section.hasSubMenu && (
+//                 <FaChevronDown
+//                   className={`transition-transform duration-200 ml-2 ${
+//                     isDropdownOpen ? 'rotate-none' : ''
+//                   }`}
+//                 />
+//               )}
+//             </div>
+
+//             {/* Submenu */}
+//             {section.hasSubMenu && isDropdownOpen && (
+//               <div className="ml-8 mt-1 space-y-1">
+//                 {hotelSubMenu.map(sub => {
+//                   const isSubActive = pathname === sub.path
+//                   return (
+//                     <Link
+//                       key={sub.path}
+//                       href={sub.path}
+//                       className={`block px-3 py-2 rounded text-sm transition-colors ${
+//                   isSubActive
+//                   ? 'bg-white shadow-md font-semibold text-sky-800'
+//                   : 'hover:bg-gray-300 text-gray-700'
+//                       }`}
+//                     >
+//                       {sub.label}
+//                     </Link>
+//                   )
+//                 })}
+//               </div>
+//             )}
+//           </div>
+//         )
+//       })}
+//     </div>
+//   )
+// }
 
 
 

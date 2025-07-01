@@ -1,7 +1,7 @@
 'use client'
 import { use } from 'react'
 import { useState } from 'react'
-import sections from '../../data/sections'
+import sections from '../data/sections'
 
 import EventCard from '@/app/components/EventCard'
 import VenueCard from '@/app/components/VenueCard'
@@ -20,6 +20,7 @@ import AddDepartmentForm from '@/app/components/AddDepartmentForm'
 import AddSupplierForm from '@/app/components/AddSupplierForm'
 import AddTeamForm from '@/app/components/AddTeamForm'
 import AddOrganizerForm from '@/app/components/AddOrganizerForm'
+import AddRoomForm from '@/app/components/AddRoomForm'
 
 export default function SectionPage({ params }) {
   const { section } = use(params)
@@ -54,6 +55,7 @@ export default function SectionPage({ params }) {
       case 'departments': return <AddDepartmentForm onClose={() => setModalOpen(false)} />
       case 'suppliers': return <AddSupplierForm onClose={() => setModalOpen(false)} />
       case 'organizers': return <AddOrganizerForm onClose={() => setModalOpen(false)} />
+      case 'category': return <AddRoomForm onClose={() => setModalOpen(false)} />
       default: return null
     }
   }
@@ -67,8 +69,6 @@ export default function SectionPage({ params }) {
         return <VenueCard key={item.id} venues={item} />
       case 'hotel':
         return <HotelCard key={item.id} hotel={item} />
-        case 'category':
-        return <RoomCategoryCard key={item.id} cat={item} />
       default:
         return null
     }
@@ -85,6 +85,8 @@ export default function SectionPage({ params }) {
         return <SupplierTable activeTab={activeTab} />
       case 'teams':
         return <TeamTable activeTab={activeTab} />
+      case 'category':
+        return <RoomCategoryCard activeTab={activeTab} />
       default:
         return null
     }
@@ -144,7 +146,7 @@ export default function SectionPage({ params }) {
       )}
 
       {/* Content */}
-      {['organizers', 'departments', 'suppliers', 'teams'].includes(section) ? (
+      {['organizers', 'departments', 'suppliers', 'teams', 'category'].includes(section) ? (
         renderSectionTable()
       ) : paginatedItems.length > 0 ? (
         paginatedItems.map(renderCard)
